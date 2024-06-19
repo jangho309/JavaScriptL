@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>시계</title>
+</head>
+<body>
+    <h1>현재시간</h1>
+    <h1 class="current_time">00:00:00</h1>
+    <script>
+        let currentDate = new Date();
+        let hour = currentDate.getHours();
+        let minute = currentDate.getMinutes();
+        let second = currentDate.getSeconds();
+        const currentTime = document.getElementsByClassName("current_time")[0];
+
+        const convertZeroTime = (time) => {
+            let timeStr = time < 10 ? `0${time}` : time;
+
+            return timeStr;
+        }
+        
+        currentTime.innerText = `${convertZeroTime(hour)}:${convertZeroTime(minute)}:${convertZeroTime(second)}`;
+
+        let interval = setInterval(() => {
+            second++;
+
+            if(second >= 60){
+                minute++;
+                second = 0;
+            }
+
+            if(minute >= 60){
+                hour++;
+                minute = 0;
+            }
+
+            if(hour >= 24){
+                hour = 0;
+            }
+            currentTime.innerText = `${convertZeroTime(hour)}:${convertZeroTime(minute)}:${convertZeroTime(second)}`;
+        }, 1000);
+
+        
+
+    </script>
+</body>
+</html>
